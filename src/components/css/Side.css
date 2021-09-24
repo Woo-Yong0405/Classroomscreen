@@ -1,0 +1,64 @@
+#side {
+    width: 20%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fbfcff;
+}
+#auth {
+    width: 100% - 20px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #dddde0;
+    border-right: 1px solid #dddde0;
+}
+#logo {
+    width: 80px;
+    height: 80px;
+}
+#text {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    padding-left: 5px;
+    padding-right: 10px;
+    font-size: 30px;
+}
+#text :first-child {
+    margin-right: 3px;
+}
+#text span {
+    text-decoration: underline;
+    color: #83cc99;
+}
+#buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 60px;
+    width: 20%;
+}
+#buttons button {
+    background-color: #3ab363;
+    border: none;
+    color: white;
+    width: 90%;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: 15px;
+}
+#loginBtn {
+    position: absolute;
+    bottom: 0;
+    width: 20%;
+    height: 50px;
+    background-color: #fbfcff;
+    border: none;
+    border-top: 1px solid #dddde0;
+    border-right: 1px solid #dddde0;
+    font-size: 20px;
+}

@@ -1,0 +1,20 @@
+header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+header h1 {
+    font-size: 50px;
+    color: #70c587;
+}
+#addBtns button {
+    background-color: #3ab363;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    margin-top: 15px;
+    width: 150px;
+    height: 30px;
+    margin-left: 30px;
+}

@@ -1,0 +1,20 @@
+@import "reset.css";
+@import "side.css";
+@import "screens.css";
+
+body {
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    font-family: Nunito, sans-serif;
+}
+main {
+    display: flex;
+}
+#center {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 100vh;
+}
