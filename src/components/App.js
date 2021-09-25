@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AppRouter from "./Router";
 
-function App() {
+const App = () => {
+  const [init, setInit] = useState(false);
+  useEffect(() => {
+    setInit(true);
+  })
   return (
-    <div>
-      <AppRouter />
-    </div>
+    <>
+      {init ? (
+        <AppRouter />
+      ) : (
+        "Initiallizing..."
+      )}
+    </>
   );
 }
 
 export default App;
+export let isLoggedIn = false;

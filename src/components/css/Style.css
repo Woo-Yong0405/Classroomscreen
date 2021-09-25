@@ -1,15 +1,16 @@
 @import "reset.css";
 @import "side.css";
 @import "screens.css";
+@import "login.css";
 
 body {
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     box-sizing: border-box;
     background-color: #ffffff;
     font-family: Nunito, sans-serif;
 }
-main {
+#root {
     display: flex;
 }
 #center {

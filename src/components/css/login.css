@@ -1,0 +1,66 @@
+#login1 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+#login1 p span {
+    color: #3ab363;
+    text-decoration: underline;
+}
+#login_main {
+    width: 33%;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#socialLogIn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+}
+#socialLogIn button {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 30px;
+    border-radius: 25px;
+    border: none;
+    color: white;
+}
+#socialLogIn :first-child {
+    background-color: #db4537;
+}
+#socialLogIn :last-child {
+    background-color: #00a4ef;
+}
+#login_main :nth-child(2) {
+    margin-bottom: 40px;
+}
+#login_main form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 40px;
+}
+#login_main input {
+    height: 30px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+}
+#email1 {
+    margin-bottom: 30px;
+    width: 100%;
+}
+#password1 {
+    margin-bottom: 20px;
+    width: 100%;
+}
+#login_main form button {
+    background-color: #3ab363;
+    border: none;
+    height: 30px;
+    border-radius: 15px;
+    color: white;
+}
