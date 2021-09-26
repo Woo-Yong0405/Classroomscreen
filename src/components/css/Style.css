@@ -3,6 +3,7 @@
 @import "screens.css";
 @import "login.css";
 @import "signup.css";
+@import "nickname.css";
 
 body {
     width: 100vw;

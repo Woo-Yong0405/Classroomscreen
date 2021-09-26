@@ -63,3 +63,18 @@
     border-right: 1px solid #dddde0;
     font-size: 20px;
 }
+.changeNickname {
+    width: 95%;
+    height: 40px;
+    margin-top: 10px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    border: none;
+    background-color: #fbfcff;
+}
+.changeNickname:hover {
+    background-color: #f8f4f4;
+}
+#green {
+    background-color: #e5f3ed;
+}
