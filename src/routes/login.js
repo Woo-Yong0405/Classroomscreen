@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authService } from "../fb"
 
-const LogIn = () => {
+const LogIn = prop => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
@@ -23,7 +23,8 @@ const LogIn = () => {
         event.preventDefault();
         try {
             await authService.signInWithEmailAndPassword(email, password);
-            history.push("/")
+            history.push("/");
+            prop.login();
         } catch (error) {
             alert(error.message)
         }
@@ -41,8 +42,8 @@ const LogIn = () => {
                     </div>
                     <p>or</p>
                     <form>
-                        <input id="email1" onChange={onChange} name="email" type="text" placeholder="E-mail" />
-                        <input id="password1" onChange={onChange} name="password" type="password" placeholder="Password" />
+                        <input id="email1" onChange={onChange} name="email" type="text" placeholder="E-mail" required />
+                        <input id="password1" onChange={onChange} name="password" type="password" placeholder="Password" required />
                         <button onClick={onLogInClick}>Log In</button>
                     </form>
                     <p>You have not got an account yet? <span onClick={signClick}>Sign up</span></p>

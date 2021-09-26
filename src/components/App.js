@@ -18,4 +18,3 @@ const App = () => {
 }
 
 export default App;
-export let isLoggedIn = false;

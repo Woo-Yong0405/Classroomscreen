@@ -1,8 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { isLoggedIn } from "./App";
 
-const Side = () => {
+const Side = ({isLoggedIn}) => {
     const history = useHistory();
     let text;
     let btnText;

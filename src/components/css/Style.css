@@ -2,6 +2,7 @@
 @import "side.css";
 @import "screens.css";
 @import "login.css";
+@import "signup.css";
 
 body {
     width: 100vw;
