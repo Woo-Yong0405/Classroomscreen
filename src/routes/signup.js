@@ -34,7 +34,13 @@ const SignUp = prop => {
           target: { name },
         } = event;
         const provider = new firebaseInstance.auth.GoogleAuthProvider();
-        await authService.signInWithPopup(provider);
+        try {
+            await authService.signInWithPopup(provider);
+            history.push("/");
+            prop.login();
+        } catch (error) {
+            alert(error.message);
+        }
     };
     return (
         <div id="center">

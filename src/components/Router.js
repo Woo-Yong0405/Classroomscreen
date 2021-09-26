@@ -9,7 +9,7 @@ const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     return(
         <Router>
-            <Side isLoggedIn={isLoggedIn}/>
+            <Side isLoggedIn={isLoggedIn} logout={() => setIsLoggedIn(false)} />
             <Switch>
                 <Route exact path="/">
                     <Home />

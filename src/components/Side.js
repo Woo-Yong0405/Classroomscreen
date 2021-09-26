@@ -1,17 +1,21 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-const Side = ({isLoggedIn}) => {
+const Side = prop => {
     const history = useHistory();
     let text;
     let btnText;
     function logClick() {
-        history.push("/login");
+        if(prop.isLoggedIn === true) {
+            prop.logout();
+        } else {
+            history.push("/login");
+        }
     }
     function signClick() {
         history.push("/signup");
     }
-    if (isLoggedIn === true) {
+    if (prop.isLoggedIn === true) {
         text = <p>Logged In</p>
         btnText = "Log Out"
     } else {
