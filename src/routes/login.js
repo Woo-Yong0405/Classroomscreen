@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authService } from "../fb"
+import { authService, firebaseInstance } from "../fb";
 
 const LogIn = prop => {
     const [email, setEmail] = useState("");
@@ -29,6 +29,13 @@ const LogIn = prop => {
             alert(error.message)
         }
     }
+    const onSocialClick = async (event) => {
+        const {
+          target: { name },
+        } = event;
+        const provider = new firebaseInstance.auth.GoogleAuthProvider();
+        await authService.signInWithPopup(provider);
+    };
     return (
         <div id="center">
             <div id="login1">
@@ -37,8 +44,7 @@ const LogIn = prop => {
                 </header>
                 <div id="login_main">
                     <div id="socialLogIn">
-                        <button>Log In With Google</button>
-                        <button>Log In With Microsoft</button>
+                        <button onClick={onSocialClick}>Log In With Google</button>
                     </div>
                     <p>or</p>
                     <form>

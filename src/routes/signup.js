@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authService } from "../fb";
+import { authService, firebaseInstance } from "../fb";
 
 const SignUp = prop => {
     const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ const SignUp = prop => {
           setPassword(value);
         }
       };
-      async function onSignUpClick(event) {
+    async function onSignUpClick(event) {
         event.preventDefault();
         try {
             await authService.createUserWithEmailAndPassword(email, password);
@@ -29,6 +29,13 @@ const SignUp = prop => {
             alert(error.message)
         }
     }
+    const onSocialClick = async (event) => {
+        const {
+          target: { name },
+        } = event;
+        const provider = new firebaseInstance.auth.GoogleAuthProvider();
+        await authService.signInWithPopup(provider);
+    };
     return (
         <div id="center">
             <div id="signup">
@@ -37,8 +44,7 @@ const SignUp = prop => {
                 </header>
                 <div id="signup_main">
                     <div id="socialLogIn">
-                        <button>Sign Up With Google</button>
-                        <button>Sign Up With Microsoft</button>
+                        <button onClick={onSocialClick}>Sign Up With Google</button>
                     </div>
                     <p>or</p>
                     <form>
