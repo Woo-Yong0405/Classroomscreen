@@ -30,9 +30,6 @@ const LogIn = prop => {
         }
     }
     const onSocialClick = async (event) => {
-        const {
-          target: { name },
-        } = event;
         const provider = new firebaseInstance.auth.GoogleAuthProvider();
         try {
             await authService.signInWithPopup(provider);

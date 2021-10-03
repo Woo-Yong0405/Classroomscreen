@@ -40,11 +40,6 @@ const Side = prop => {
             </div>
             <button className="changeNickname" onClick={onHomeClick} id={id1}>Home</button>
             {prop.isLoggedIn && (<button className="changeNickname" onClick={onNickClick} id={id2}>Change Nickname</button>)}
-            <div id="buttons">
-                <button>New Screen</button>
-                <button>New Poll</button>
-                <button>New Group Maker</button>
-            </div>
             <button id="loginBtn" onClick={logClick}>{btnText}</button>
         </div>
     )

@@ -6,15 +6,18 @@ import Home from "../routes/home";
 import Side from "./Side";
 import Nickname from "../routes/nickname";
 
+
+
 const AppRouter = () => {
+    
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [nickname, setNickname] = useState("Anonymous");
     return(
         <Router>
-            <Side isLoggedIn={isLoggedIn} logout={() => setIsLoggedIn(false)} nickname={nickname} />
+            <Side isLoggedIn={isLoggedIn} logout={() => setIsLoggedIn(false)} nickname={nickname}/>
             <Switch>
                 <Route exact path="/">
-                    <Home />
+                    <Home isLoggedIn/>
                 </Route>
                 <Route path="/login">
                     <LogIn login={() => setIsLoggedIn(true)}/>

@@ -17,3 +17,23 @@ header h1 {
     height: 30px;
     margin-left: 30px;
 }
+#screens {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#newScreen {
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#screens :last-child {
+    margin-right: 0;
+}
+#newScreen p {
+    font-size: 30px;
+}
+#newScreen h1 {
+    font-size: 20px;
+}
