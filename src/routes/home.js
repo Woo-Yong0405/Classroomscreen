@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { dbService } from "../fb";
 
 const Home = prop => {
     let type;
+    const [isOpen, setIsOpen] = useState(false);
     function newWindow(type) {
         let name = `New ${type}`;
         const window = document.createElement("div");
@@ -11,20 +13,31 @@ const Home = prop => {
         window.append(windowType);
         const windowTitle = document.createElement("h1");
         windowTitle.innerText = `${name}`;
+        windowTitle.id = "newScreen_title"
         const windowForm = document.createElement("form");
+        windowForm.id = "newScreen_form";
         window.append(windowTitle);
+        window.append(windowForm);
+        windowForm.hidden = true;
         const windowInput = document.createElement("input");
         windowInput.type = "text";
+        windowInput.id = "newScreen_input"
         windowInput.value = `${name}`;
         windowForm.append(windowInput);
-        windowTitle.addEventListener("click", () => windowTitle.replaceWith(windowForm));
-        if (document.hasFocus() === false) {
-            windowInput.replaceWith(windowTitle);
-        }
-        windowInput.addEventListener("change", (event) => {
-            const {target: {value}} = event;
-            name = value;
+        const windowSubmit = document.createElement("button");
+        windowSubmit.innerText = "Change";
+        windowForm.append(windowSubmit);
+        windowTitle.addEventListener("click", () => {
+            const form = document.getElementById("newScreen_form");
+            windowTitle.hidden = true;
+            form.hidden = false;
         });
+        windowSubmit.addEventListener("click", (e) => {
+            e.preventDefault();
+            const title = document.getElementById("newScreen_title");
+            windowForm.hidden = true;
+            title.hidden = false;
+        })
         const windowOpenBtn = document.createElement("button");
         windowOpenBtn.innerText = "Open";
         windowOpenBtn.id = "window_open";
@@ -54,6 +67,11 @@ const Home = prop => {
         }
         const window = newWindow(type);
         screensDiv.append(window);
+        if (prop.userObj !== null) {
+            dbService.collection(`${prop.userObj.uid}`).doc("window").add({
+                type: {type}
+            })
+        };
     }
     return (
         <div id="center">

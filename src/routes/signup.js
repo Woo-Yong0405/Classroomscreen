@@ -25,6 +25,10 @@ const SignUp = prop => {
             await authService.createUserWithEmailAndPassword(email, password);
             history.push("/");
             prop.login();
+            const user = authService.currentUser;
+            prop.setUserObj({
+                uid: user.id
+            });
         } catch (error) {
             alert(error.message)
         }
@@ -35,6 +39,10 @@ const SignUp = prop => {
             await authService.signInWithPopup(provider);
             history.push("/");
             prop.login();
+            const user = authService.currentUser;
+            prop.setUserObj({
+                uid: user.id
+            });
         } catch (error) {
             alert(error.message);
         }
