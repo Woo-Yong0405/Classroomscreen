@@ -3,7 +3,9 @@ import React from "react";
 const Nickname = prop => {
     function onChange(event) {
         const {target: {value}} = event;
-        prop.setNickname(value);
+        prop.userObj.nickname = value;
+        prop.setNickname(`${prop.userObj.nickname}`);
+        console.log(prop.userObj.nickname);
     }
     return (
         <div id="center">

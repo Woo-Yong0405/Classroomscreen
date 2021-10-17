@@ -24,11 +24,13 @@ const SignUp = prop => {
         try {
             await authService.createUserWithEmailAndPassword(email, password);
             history.push("/");
-            prop.login();
             const user = authService.currentUser;
             prop.setUserObj({
-                uid: user.id
+                uid: user.uid,
+                nickname: user.displayName
             });
+            prop.login();
+            prop.setNickname(user.displayName);
         } catch (error) {
             alert(error.message)
         }
@@ -38,11 +40,13 @@ const SignUp = prop => {
         try {
             await authService.signInWithPopup(provider);
             history.push("/");
-            prop.login();
             const user = authService.currentUser;
             prop.setUserObj({
-                uid: user.id
+                uid: user.uid,
+                nickname: user.displayName
             });
+            prop.login();
+            prop.setNickname(user.displayName);
         } catch (error) {
             alert(error.message);
         }

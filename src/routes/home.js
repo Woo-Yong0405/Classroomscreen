@@ -45,33 +45,49 @@ const Home = prop => {
         const btnDiv = document.createElement("div");
         window.append(btnDiv);
         btnDiv.id = "window_btns";
-        const dupeBtn = document.createElement("button");
-        dupeBtn.innerText = "Duplicate";
-        btnDiv.append(dupeBtn);
         const deleteBtn = document.createElement("button");
         deleteBtn.innerText = "Delete";
+        deleteBtn.id = "deleteBtn";
         btnDiv.append(deleteBtn);
         return window;
     }
     function onNewClick(event) {
-        const {
-            target: {name}
-        } = event;
-        const screensDiv = document.getElementById("screens");
-        if(name === "screen") {
-            type = "Screen";
-        } else if (name === "poll") {
-            type = "Poll";
-        } else if (name === "group") {
-            type = "Group Maker";
+        if (prop.userObj === null) {
+            alert("Please sign up or log in.");
+        } else {
+            if (isOpen === false) {
+                const {
+                    target: {name}
+                } = event;
+                const screensDiv = document.getElementById("screens");
+                type = name;
+                const window = newWindow(type);
+                screensDiv.append(window);
+                setIsOpen(true);
+                dbService.collection(`${prop.userObj.uid}`).doc("windowopen").set({
+                    type: {type},
+                });
+                function handleDeleteClick() {
+                    const window = document.getElementById("newScreen");
+                    window.remove();
+                    setIsOpen(false);
+                    dbService.doc(`${prop.userObj.uid}/windowopen`).delete();
+                }
+                const deleteBtn = document.getElementById("deleteBtn");
+                deleteBtn.addEventListener("click", handleDeleteClick);
+            } else {
+                alert("You can only have 1 window created at a time.")
+            }
         }
-        const window = newWindow(type);
-        screensDiv.append(window);
-        if (prop.userObj !== null) {
-            dbService.collection(`${prop.userObj.uid}`).doc("window").add({
-                type: {type}
-            })
-        };
+    }
+    if (prop.isLoggedIn === true) {
+        if (dbService.doc(`${prop.userObj.uid}/windowopen`) !== null) {
+            type = dbService.doc(`${prop.userObj.uid}/windowopen`).type;
+            const screensDiv = document.getElementById("screens");
+            const window = newWindow(type);
+            screensDiv.append(window);
+            setIsOpen(true);
+        }
     }
     return (
         <div id="center">
@@ -81,9 +97,9 @@ const Home = prop => {
                 </header>
                 <div id="screens"></div>
                 <div id="addBtns">
-                    <button onClick={onNewClick} name="screen">Add Screen</button>
-                    <button onClick={onNewClick} name="poll">Add Poll</button>
-                    <button onClick={onNewClick} name="group">Add Group Maker</button>
+                    <button onClick={onNewClick} name="Screen">Add Screen</button>
+                    <button onClick={onNewClick} name="Poll">Add Poll</button>
+                    <button onClick={onNewClick} name="Group Maker">Add Group Maker</button>
                 </div>
             </div>
         </div>
