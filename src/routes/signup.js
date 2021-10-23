@@ -29,8 +29,8 @@ const SignUp = prop => {
                 uid: user.uid,
                 nickname: user.displayName
             });
-            prop.login();
             prop.setNickname(user.displayName);
+            prop.setIsLoggedIn(true);
         } catch (error) {
             alert(error.message)
         }
@@ -45,8 +45,8 @@ const SignUp = prop => {
                 uid: user.uid,
                 nickname: user.displayName
             });
-            prop.login();
             prop.setNickname(user.displayName);
+            prop.setIsLoggedIn(true);
         } catch (error) {
             alert(error.message);
         }

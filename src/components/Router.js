@@ -21,10 +21,10 @@ const AppRouter = () => {
                     <Home isLoggedIn={isLoggedIn} userObj={userObj}/>
                 </Route>
                 <Route path="/login">
-                    <LogIn setNickname={(as) => setNickname(as)} login={() => setIsLoggedIn(true)} userObj={userObj} setUserObj={(thing) => setUserObj(thing)}/>
+                    <LogIn setNickname={(as) => setNickname(as)} setIsLoggedIn={(asdf) => setIsLoggedIn(asdf)} userObj={userObj} setUserObj={(thing) => setUserObj(thing)}/>
                 </Route>
                 <Route path="/signup">
-                    <SignUp setNickname={(as) => setNickname(as)} login={() => setIsLoggedIn(true)} userObj={userObj} setUserObj={(thing) => setUserObj(thing)}/>
+                    <SignUp setNickname={(as) => setNickname(as)} setIsLoggedIn={(asdf) => setIsLoggedIn(asdf)} userObj={userObj} setUserObj={(thing) => setUserObj(thing)}/>
                 </Route>
                 <Route path="/changenickname">
                     <Nickname nickname={nickname} setNickname={(message) => setNickname(message)} userObj={userObj} setUserObj={(thing) => setUserObj(thing)}/>

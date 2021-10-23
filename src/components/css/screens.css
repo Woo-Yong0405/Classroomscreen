@@ -22,7 +22,7 @@ header h1 {
     display: flex;
     justify-content: center;
 }
-#newScreen {
+.newScreen {
     margin-right: 10px;
     display: flex;
     flex-direction: column;

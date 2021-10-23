@@ -7,7 +7,7 @@ const Home = prop => {
     function newWindow(type) {
         let name = `New ${type}`;
         const window = document.createElement("div");
-        window.id = "newScreen"
+        window.classList.add("newScreen")
         const windowType = document.createElement("p");
         windowType.innerText = `${type}`
         window.append(windowType);
@@ -67,14 +67,13 @@ const Home = prop => {
                 dbService.collection(`${prop.userObj.uid}`).doc("windowopen").set({
                     type: {type},
                 });
-                function handleDeleteClick() {
-                    const window = document.getElementById("newScreen");
+                const deleteBtn = document.getElementById("deleteBtn");
+                deleteBtn.addEventListener("click", () => {
+                    const window = document.getElementsByClassName("newScreen");
                     window.remove();
                     setIsOpen(false);
                     dbService.doc(`${prop.userObj.uid}/windowopen`).delete();
-                }
-                const deleteBtn = document.getElementById("deleteBtn");
-                deleteBtn.addEventListener("click", handleDeleteClick);
+                });
             } else {
                 alert("You can only have 1 window created at a time.")
             }
