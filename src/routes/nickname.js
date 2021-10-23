@@ -1,11 +1,16 @@
 import React from "react";
+import { authService, dbService } from "../fb";
 
 const Nickname = prop => {
     function onChange(event) {
         const {target: {value}} = event;
-        prop.userObj.nickname = value;
-        prop.setNickname(`${prop.userObj.nickname}`);
-        console.log(prop.userObj.nickname);
+        const user = authService.currentUser;
+        dbService.doc(`${user.uid}/userinfo`).update({
+            nickname: value,
+        });
+        dbService.doc(`${user.uid}/userinfo`).get().then((doc) => {
+            prop.setNickname(doc.data().nickname)
+        })
     }
     return (
         <div id="center">

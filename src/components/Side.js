@@ -27,12 +27,11 @@ const Side = prop => {
         id2 = "green";
     }
     if (prop.isLoggedIn === true) {
-        let nickname;
         const user = authService.currentUser;
         dbService.doc(`${user.uid}/userinfo`).get().then((doc) => {
-            nickname = doc.data().nickname;
-        });
-        text = <p>{nickname}</p>
+            prop.setNickname(doc.data().nickname);
+        })
+        text = <p>{prop.nickname}</p>
         btnText = "Log Out"
     } else {
         text = <p>Go to: <span id="login" onClick={logClick}>login</span>/<span id="signup" onClick={signClick}>signup</span></p>

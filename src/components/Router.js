@@ -10,9 +10,10 @@ import Nickname from "../routes/nickname";
 
 const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [nickname, setNickname] = useState("");
     return(
         <Router>
-            <Side isLoggedIn={isLoggedIn} logout={() => setIsLoggedIn(false)}/>
+            <Side isLoggedIn={isLoggedIn} logout={() => setIsLoggedIn(false)} nickname={nickname} setNickname={(a) => setNickname(a)}/>
             <Switch>
                 <Route exact path="/">
                     <Home isLoggedIn={isLoggedIn}/>
@@ -24,7 +25,7 @@ const AppRouter = () => {
                     <SignUp login={() => setIsLoggedIn(true)}/>
                 </Route>
                 <Route path="/changenickname">
-                    <Nickname />
+                    <Nickname nickname={nickname} setNickname={(a) => setNickname(a)}/>
                 </Route>
             </Switch>
         </Router>
