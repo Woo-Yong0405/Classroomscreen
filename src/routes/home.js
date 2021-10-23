@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { dbService } from "../fb";
+import { authService, dbService } from "../fb";
 
-const Home = prop => {
+const Home = (prop) => {
     let type;
     const [isOpen, setIsOpen] = useState(false);
     function newWindow(type) {
         let name = `New ${type}`;
         const window = document.createElement("div");
-        window.classList.add("newScreen")
+        window.id = "newScreen";
         const windowType = document.createElement("p");
         windowType.innerText = `${type}`
         window.append(windowType);
@@ -52,7 +52,7 @@ const Home = prop => {
         return window;
     }
     function onNewClick(event) {
-        if (prop.userObj === null) {
+        if (prop.isLoggedIn === false) {
             alert("Please sign up or log in.");
         } else {
             if (isOpen === false) {
@@ -64,28 +64,21 @@ const Home = prop => {
                 const window = newWindow(type);
                 screensDiv.append(window);
                 setIsOpen(true);
-                dbService.collection(`${prop.userObj.uid}`).doc("windowopen").set({
+                const user = authService.currentUser;
+                dbService.collection(`${user.uid}`).doc("windowopen").set({
                     type: {type},
                 });
                 const deleteBtn = document.getElementById("deleteBtn");
                 deleteBtn.addEventListener("click", () => {
-                    const window = document.getElementsByClassName("newScreen");
+                    const window = document.getElementById("newScreen");
                     window.remove();
                     setIsOpen(false);
-                    dbService.doc(`${prop.userObj.uid}/windowopen`).delete();
+                    const user = authService.currentUser;
+                    dbService.doc(`${user.uid}/windowopen`).delete();
                 });
             } else {
                 alert("You can only have 1 window created at a time.")
             }
-        }
-    }
-    if (prop.isLoggedIn === true) {
-        if (dbService.doc(`${prop.userObj.uid}/windowopen`) !== null) {
-            type = dbService.doc(`${prop.userObj.uid}/windowopen`).type;
-            const screensDiv = document.getElementById("screens");
-            const window = newWindow(type);
-            screensDiv.append(window);
-            setIsOpen(true);
         }
     }
     return (

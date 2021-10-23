@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { authService, dbService } from "../fb";
 
 const Side = prop => {
     const history = useHistory();
@@ -26,7 +27,12 @@ const Side = prop => {
         id2 = "green";
     }
     if (prop.isLoggedIn === true) {
-        text = <p>{prop.nickname}</p>
+        let nickname;
+        const user = authService.currentUser;
+        dbService.doc(`${user.uid}/userinfo`).get().then((doc) => {
+            nickname = doc.data().nickname;
+        });
+        text = <p>{nickname}</p>
         btnText = "Log Out"
     } else {
         text = <p>Go to: <span id="login" onClick={logClick}>login</span>/<span id="signup" onClick={signClick}>signup</span></p>

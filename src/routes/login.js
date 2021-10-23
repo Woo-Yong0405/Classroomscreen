@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authService, firebaseInstance } from "../fb";
+import { authService, dbService, firebaseInstance } from "../fb";
 
-const LogIn = prop => {
+const LogIn = (prop) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
@@ -23,30 +23,28 @@ const LogIn = prop => {
         event.preventDefault();
         try {
             await authService.signInWithEmailAndPassword(email, password);
-            history.push("/");
             const user = authService.currentUser;
-            prop.setUserObj({
+            dbService.doc(`${user.uid}/userinfo`).set({
                 uid: user.uid,
-                nickname: user.displayName
+                nickname: user.displayName,
             });
-            prop.setNickname(user.displayName);
-            prop.setIsLoggedIn(true);
+            prop.login();
+            history.push("/");
         } catch (error) {
             alert(error.message)
         }
     }
-    const onSocialClick = async (event) => {
+    const onSocialClick = async () => {
         const provider = new firebaseInstance.auth.GoogleAuthProvider();
         try {
             await authService.signInWithPopup(provider);
-            history.push("/");
             const user = authService.currentUser;
-            prop.setUserObj({
+            dbService.doc(`${user.uid}/userinfo`).set({
                 uid: user.uid,
-                nickname: user.displayName
+                nickname: user.displayName,
             });
-            prop.setNickname(user.displayName);
-            prop.setIsLoggedIn(true);
+            prop.login();
+            history.push("/");
         } catch (error) {
             alert(error.message)
         }

@@ -9,25 +9,22 @@ import Nickname from "../routes/nickname";
 
 
 const AppRouter = () => {
-    
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [nickname, setNickname] = useState("");
-    const [userObj, setUserObj] = useState(null);
     return(
         <Router>
-            <Side isLoggedIn={isLoggedIn} logout={() => setIsLoggedIn(false)} nickname={nickname}/>
+            <Side isLoggedIn={isLoggedIn} logout={() => setIsLoggedIn(false)}/>
             <Switch>
                 <Route exact path="/">
-                    <Home isLoggedIn={isLoggedIn} userObj={userObj}/>
+                    <Home isLoggedIn={isLoggedIn}/>
                 </Route>
                 <Route path="/login">
-                    <LogIn setNickname={(as) => setNickname(as)} setIsLoggedIn={(asdf) => setIsLoggedIn(asdf)} userObj={userObj} setUserObj={(thing) => setUserObj(thing)}/>
+                    <LogIn login={() => setIsLoggedIn(true)}/>
                 </Route>
                 <Route path="/signup">
-                    <SignUp setNickname={(as) => setNickname(as)} setIsLoggedIn={(asdf) => setIsLoggedIn(asdf)} userObj={userObj} setUserObj={(thing) => setUserObj(thing)}/>
+                    <SignUp login={() => setIsLoggedIn(true)}/>
                 </Route>
                 <Route path="/changenickname">
-                    <Nickname nickname={nickname} setNickname={(message) => setNickname(message)} userObj={userObj} setUserObj={(thing) => setUserObj(thing)}/>
+                    <Nickname />
                 </Route>
             </Switch>
         </Router>
