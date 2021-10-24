@@ -37,6 +37,15 @@ const Home = (prop) => {
             const title = document.getElementById("newScreen_title");
             windowForm.hidden = true;
             title.hidden = false;
+            title.innerText = `${name}`;
+        });
+        const user = authService.currentUser;
+        windowInput.addEventListener("change", (event) => {
+            const {target:{value}} = event;
+            dbService.doc(`${user.uid}/windowopen`).update({
+                name: value,
+            });
+            name = value;
         })
         const windowOpenBtn = document.createElement("button");
         windowOpenBtn.innerText = "Open";
@@ -49,8 +58,14 @@ const Home = (prop) => {
         deleteBtn.innerText = "Delete";
         deleteBtn.id = "deleteBtn";
         btnDiv.append(deleteBtn);
+        deleteBtn.addEventListener("click", () => {
+            const window = document.getElementById("newScreen");
+            window.remove();
+            setIsOpen(false);
+            dbService.doc(`${user.uid}/windowopen`).delete();
+        });
         return window;
-    }
+    };
     function onNewClick(event) {
         if (prop.isLoggedIn === false) {
             alert("Please sign up or log in.");
@@ -67,20 +82,13 @@ const Home = (prop) => {
                 const user = authService.currentUser;
                 dbService.collection(`${user.uid}`).doc("windowopen").set({
                     type: {type},
-                });
-                const deleteBtn = document.getElementById("deleteBtn");
-                deleteBtn.addEventListener("click", () => {
-                    const window = document.getElementById("newScreen");
-                    window.remove();
-                    setIsOpen(false);
-                    const user = authService.currentUser;
-                    dbService.doc(`${user.uid}/windowopen`).delete();
+                    name: `New ${type}`,
                 });
             } else {
                 alert("You can only have 1 window created at a time.")
-            }
-        }
-    }
+            };
+        };
+    };
     return (
         <div id="center">
             <div id="screensB">
